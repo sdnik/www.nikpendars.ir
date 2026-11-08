@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<title>Home  نخستین </title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<center>
+<script>
+week= new Array("يكشنبه","دوشنبه","سه شنبه","چهارشنبه","پنج شنبه","جمعه","شنبه")
+months = new Array("فروردين","ارديبهشت","خرداد","تير","مرداد","شهريور","مهر","آبان","آذر","دي","بهمن","اسفند");
+a = new Date();
+d= a.getDay();
+day= a.getDate();
+month = a.getMonth()+1;
+year= a.getYear();
+year = (year== 0)?2000:year;
+(year<1000)? (year += 1900):true;
+year -= ( (month < 3) || ((month == 3) && (day < 21)) )? 622:621;
+switch (month) {
+case 1: (day<21)? (month=10, day+=10):(month=11, day-=20); break;
+case 2: (day<20)? (month=11, day+=11):(month=12, day-=19); break;
+case 3: (day<21)? (month=12, day+=9):(month=1, day-=20); break;
+case 4: (day<21)? (month=1, day+=11):(month=2, day-=20); break;
+case 5:
+case 6: (day<22)? (month-=3, day+=10):(month-=2, day-=21); break;
+case 7:
+case 8:
+case 9: (day<23)? (month-=3, day+=9):(month-=2, day-=22); break;
+case 10:(day<23)? (month=7, day+=8):(month=8, day-=22); break;
+case 11:
+case 12:(day<22)? (month-=3, day+=9):(month-=2, day-=21); break;
+default: break;
+}
+document.write(" "+week[d]+" "+day+" "+months[month-1]+" "+ year);
+</script>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+
+<!--Total Java Scripts 99 - Next Step Software-->
+
+<!-- Begin
+monthnames = new Array(
+"January",
+"Februrary",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"Decemeber");
+var linkcount=0;
+function addlink(month, day, href) {
+var entry = new Array(3);
+entry[0] = month;
+entry[1] = day;
+entry[2] = href;
+this[linkcount++] = entry;
+}
+Array.prototype.addlink = addlink;
+linkdays = new Array();
+monthdays = new Array(12);
+monthdays[0]=31;
+monthdays[1]=28;
+monthdays[2]=31;
+monthdays[3]=30;
+monthdays[4]=31;
+monthdays[5]=30;
+monthdays[6]=31;
+monthdays[7]=31;
+monthdays[8]=30;
+monthdays[9]=31;
+monthdays[10]=30;
+monthdays[11]=31;
+todayDate=new Date();
+thisday=todayDate.getDay();
+thismonth=todayDate.getMonth();
+thisdate=todayDate.getDate();
+thisyear=todayDate.getYear();
+thisyear = thisyear % 100;
+thisyear = ((thisyear < 50) ? (2000 + thisyear) : (1900 + thisyear));
+if (((thisyear % 4 == 0) 
+&& !(thisyear % 100 == 0))
+||(thisyear % 400 == 0)) monthdays[1]++;
+startspaces=thisdate;
+while (startspaces > 7) startspaces-=7;
+startspaces = thisday - startspaces + 1;
+if (startspaces < 0) startspaces+=7;
+document.write("<table border=2 bgcolor=white ");
+document.write("bordercolor=black><font color=black>");
+document.write("<tr><td colspan=7><center><strong>" 
++ monthnames[thismonth] + " " + thisyear 
++ "</strong></center></font></td></tr>");
+document.write("<tr>");
+document.write("<td align=center>Su</td>");
+document.write("<td align=center>M</td>");
+document.write("<td align=center>Tu</td>");
+document.write("<td align=center>W</td>");
+document.write("<td align=center>Th</td>");
+document.write("<td align=center>F</td>");
+document.write("<td align=center>Sa</td>"); 
+document.write("</tr>");
+document.write("<tr>");
+for (s=0;s<startspaces;s++) {
+document.write("<td> </td>");
+}
+count=1;
+while (count <= monthdays[thismonth]) {
+for (b = startspaces;b<7;b++) {
+linktrue=false;
+document.write("<td>");
+for (c=0;c<linkdays.length;c++) {
+if (linkdays[c] != null) {
+if ((linkdays[c][0]==thismonth + 1) && (linkdays[c][1]==count)) {
+document.write("<a href=\"" + linkdays[c][2] + "\">");
+linktrue=true;
+      }
+   }
+}
+if (count==thisdate) {
+document.write("<font color='FF0000'><strong>");
+}
+if (count <= monthdays[thismonth]) {
+document.write(count);
+}
+else {
+document.write(" ");
+}
+if (count==thisdate) {
+document.write("</strong></font>");
+}
+if (linktrue)
+document.write("</a>");
+document.write("</td>");
+count++;
+}
+document.write("</tr>");
+document.write("<tr>");
+startspaces=0;
+}
+document.write("</table></p>");
+// End -->
+</SCRIPT>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script language="JavaScript">
+var timerID = null;
+var timerRunning = false;
+function stopclock (){
+if(timerRunning)
+clearTimeout(timerID);
+timerRunning = false;
+}
+function showtime () {
+var now = new Date();
+var hours = now.getHours();
+var minutes = now.getMinutes();
+var seconds = now.getSeconds()
+var timeValue = "" + ((hours >12) ? hours -12 :hours)
+if (timeValue == "0") timeValue = 12;
+timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+timeValue += (hours >= 12) ? " P.M." : " A.M."
+document.clock.face.value = timeValue;
+timerID = setTimeout("showtime()",1000);
+timerRunning = true;
+}
+function startclock() {
+stopclock();
+showtime();
+}
+</script>
+<body onLoad="startclock()">
+<right>
+<form name="clock">
+<input type="text" name="face" size=13 value="">
+</form>
+</right>
+<!-- Script Size:  2.98 KB  --></center></font></body></html></div>
+
+</head>
+
+<body   BGCOLOR="#c0c0c0"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+
+
+<p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+
+
+
+<p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img border="0" src="_borders/charity1-min.jpg" width="1200" height="400"> </p>
+
+<p align="center">
+<a href="index.htm"><img src="_derived/home_cmp_citrus110_gbtn.gif" width="95" height="20" border="0" alt="Home" align="middle"></a> <a href="english_page.htm"><img src="_derived/english_page.htm_cmp_citrus110_gbtn.gif" width="95" height="20" border="0" alt="English page" align="middle"></a> <a href="Aims.htm"><img src="_derived/Aims.htm_cmp_citrus110_gbtn.gif" width="95" height="20" border="0" alt="&#1575;&#1607;&#1583;&#1575;&#1601;Aims" align="middle"></a>
+</p>
+<p align="center">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="_derived/index.htm_cmp_citrus110_bnr.gif" width="600" height="60" border="0" alt="&#1589;&#1601;&#1581;&#1607; &#1575;&#1589;&#1604;&#1610;Home"></center>
+<p align="center"><font size="10" face="IranNastaliq"><font color="#FF0000"><i>
+به سایت بنیاد نیک پندار خوش آمدید
+</font></center></p>
+<p align="center">
+<marquee bgcolor="#FFFF00" style="color: #00FFFF" align="bottom" behavior="alternate" direction="right" align="left" p><font face="B Morvarid" size="8" color="#0000FF"><i><span style="background-color: #FFFF00">
+&#1576;&#1585;&#1575;&#1610;&#1578;&#1575;&#1606;
+&#1587;&#1604;&#1575;&#1605;&#1578;&#1610; &#1587;&#1585;&#1608;&#1585;
+&#1587;&#1585;&#1575;&#1601;&#1585;&#1575;&#1586;&#1610;
+&#1587;&#1593;&#1575;&#1583;&#1578; &#1587;&#1585;&#1605;&#1575;&#1610;&#1607;
+&#1585;&#1608;&#1586;&#1575;&#1601;&#1586;&#1608;&#1606;
+&#1587;&#1608;&#1583;&#1587;&#1585;&#1588;&#1575;&#1585;
+&#1587;&#1582;&#1575;&#1608;&#1578;
+&#1570;&#1585;&#1586;&#1608;&#1583;&#1575;&#1585;&#1610;&#1605;We wish you health, happiness, prosperity, wealth, wealth, and generosity</span></i></font> </marquee>
+<p>
+       <script language="VBscript"><!-- msgbox "now, the date is "& date document.write "the date is " & date --></script>
+       <script language="VBscript"><!-- msgbox "now, the time is "& time document.write "the time is " & time --></script>
+</font>
+&nbsp;
+<p>
+<center> 
+    <div class="container">
+        <h2>ورود به حساب کاربری</h2>
+        <form action="login_process.php" method="POST">
+            <div>
+                <label for="email">ایمیل:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">رمز عبور:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+                         <br><br>
+            <button type="submit">ورود</button>
+                          <br><br>
+            <a href="forgot_password.html">فراموشی رمز عبور؟</a>
+            </form></p>
+        <p>حساب کاربری ندارید؟ <a href="file:///E:/WEBS/bonyad/register.html">ثبت‌نام کنید</a></p>
+    </div></center>
+&nbsp;
+<p>
+<center>
+<p align="center"><font size="10" face="IranNastaliq"><font color="#0008B"><i>
+بخشهای فعالیت بنیاد 
+</p>
+<div>
+<p>
+<center>
+</p>
+<center>
+
+            <TABLE width="83%" border=1 height="493">
+              <TBODY>
+              <TR>
+                <TD width="33%" height="40">
+                  <P align=center><a href="file:///E:/WEBS/bonyad/shop/shop1.html"><font face="Btitr" size="10">نمایشگاه وفروشگاه بنیاد</font></a></P></TD>
+                <TD width="33%" height="40">
+                  <P align=center><a href="file:///E:/WEBS/%D8%B3%D8%A7%D8%AE%D8%AA%20%D9%88%D8%A8%D8%B3%D8%A7%DB%8C%D8%AA/bonyad/conect/login.html"><font face="B Yagut" color="#ff0000" size="10">ازهمه علاقمندان به فعالیتهای فرهنگی وهنری وخدمات اجتماعی دعوت میگردد برای همکاری بابنیاد </a></font><FONT 
+                  face="B Yagut">&nbsp;&nbsp;</FONT></P></TD>
+                <TD width="34%" height="40">
+                  <P align=center><a href="file:///E:/WEBS/bonyad/conect/conect.html"><font face="Btitr" size="10">ارتباط اعضا بنیاد</a></font></P></TD></TR>
+ 
+              <TR>
+                <TD width="33%" height="145">
+                  <P align=center><a href="file:///G:/bakup/web/%D8%B3%D8%A7%D8%AE%D8%AA%20%D9%88%D8%A8%D8%B3%D8%A7%DB%8C%D8%AA/bonyad/ajans/ajans.htm"><font face="B Koodak" size="16" color="#800080" > تورهاوورکشاپهای تفریحی وبهترزیستن بنیاد </font></a></P>
+                  <P align="center">&nbsp;</P></TD>
+                <TD width="33%" rowSpan=2 height="217">
+                  <p align="center"><img border="0" src="damavand.jpg" width="331" height="217"></p>
+                </TD>
+                <TD width="34%" height="145">
+                  <P align=center><a href="file:///E:/WEBS/bonyad/freelancer/freelancer.html"><font face="B Koodak" size="16" color="#800080" >دفتر کارفریلنسری اعضا بنیاد</a></font> </P></TD></TR>
+              <TR>
+                <TD width="33%" height="66">
+                  <P align=center><a href="file:///E:/WEBS/bonyad/galery/index.html"><font face="B Koodak "></a></font></P></TD>
+                <TD width="34%" height="66">
+                  <P align=center><a href="file:///E:/WEBS/%D8%B3%D8%A7%D8%AE%D8%AA%20%D9%88%D8%A8%D8%B3%D8%A7%DB%8C%D8%AA/bonyad/freelancer/index.html"><font face="B Koodak color="#800080" ></a></font> </P></TD></TR>
+              <TR>
+                <TD width="33%" rowspan="6" height="280">
+                  <p align="center"><embed width="128" height="128" src="Picture%20036.avi">&nbsp;</p>
+                </TD>
+                <TD width="33%" height="39">
+                  <P align=center><a href="file:///E:/WEBS/bonyad/register.html"><font face="B Koodak " size="8"> مشاوره</a></font> 
+                  <P align=center>&nbsp;</P></TD>
+                <TD width="34%" rowspan="6" height="280">
+                  <p align="center"><embed width="128" height="128" src="Picture%20041.avi">
+                </TD></TR>
+              <tr>
+                <TD width="33%" height="20">
+                  <p align="center"><a href="file:///E:/WEBS/bonyad/register.html"><font face="B Jadid" size="6" color="#008000">حقوقی وکیفری </font></a></P></TD></TR> 
+              <tr>
+                <TD width="33%" height="40">
+                  <p align="center"><a href="new_page_4.htm"><font size="6" face="B Farnaz" color="#00FFFF"> سرمایه گذاری  </font></a></TD>
+              </tr>
+              <tr>
+                <TD width="33%" height="33">
+                  <p align="center"><a href="new_page_9.htm"><font face="B Majid Shadow" color="#800080" size="5"> 6 </font></a></TD>
+              </tr>
+              <tr>
+                <TD width="33%" height="35">
+                  <p align="center"><a href="file:///E:/WEBS/bonyad/register.html"><font face="B Davat" color="#00FFFF" size="5">7 </a></font></TD>
+              </tr>
+              <tr>
+                <TD width="33%" height="55">
+                  <p align="center"><a href="file:///E:/WEBS/bonyad/classroom.html"><font face="B Farnaz" color="#FFFF00" size="12"> بازاریابی</font></a></TD>
+              </tr>
+              <tr>
+                <TD width="33%" rowspan="2" height="100">
+                  <form method="POST" action="--WEBBOT-SELF--">
+                    <!--webbot bot="SaveResults"
+                    U-File="fpweb:///_private/form_results.txt"
+                    S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
+                    <p align="center"><textarea rows="7" name="S1" cols="20"></textarea></p>
+                  </form>
+                  <p>&nbsp;
+                </TD>
+                <TD width="33%" height="44">
+                  <p align="center"><a href="file:///E:/WEBS/bonyad/register.html"><font face="B Jadid" color="#FFC0CB" size="14"> آموزش </font></a></p></TD>
+                  <p align="center">&nbsp;</TD>
+                <TD width="34%" rowspan="2" height="100">
+                  <form method="POST" action="--WEBBOT-SELF--">
+                    <!--webbot bot="SaveResults"
+                    U-File="fpweb:///_private/form_results.txt"
+                    S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
+                    <p align="center"><textarea rows="7" name="S1" cols="20"></textarea></p>
+                  </form>
+                  <p>&nbsp;
+                </TD>
+              </tr>
+              <tr>
+                <TD width="33%" height="25">
+                <p align="center"><a href="file:///E:/WEBS/bonyad/register.html"><font face="B Farnaz" color="#FF00FF" size="10">کتابخانه</font></a></TD>
+                
+                </TD>
+              </tr>
+              </TBODY></TABLE></font></center>
+<div>
+</div>
+ </font>  
+<p>
+</p>
+<div>
+<p><center><h3>پیامگیر</p></h3>
+</font>
+    <div class="form-container">
+            <form name="frmContact" id="" frmContact"" method="post"
+            action="contact.php" enctype="multipart/form-data"
+            onsubmit="return validateContactForm()">
+                 <div class="input-row">
+                <label style="padding-top: 20px;">Nameنام</label> <span
+                    id="Name-info" class="info"></span><br /> <input
+                    type="text" class="input-field" name="Name"
+                    id="Name" />
+            </div>
+            <div class="input-row">
+                <label style="padding-top: 20px;">familyفامیل</label> <span
+                    id="userName-info" class="info"></span><br /> <input
+                    type="text" class="input-field" name="userName"
+                    id="userName" />
+            </div>
+              <div class="input-row">
+                <label style="padding-top: 20px;">cityسکونت</label> <span
+                    id="city-info" class="info"></span><br /> <input
+                    type="text" class="input-field" name="city"
+                    id="city" />
+            </div>
+            <div class="input-row">
+                <label>Emailایمیل</label> <span id="userEmail-info"
+                    class="info"></span><br /> <input type="text"
+                    class="input-field" name="userEmail" id="userEmail" />
+            </div>
+            <div class="input-row">
+                <label>Subjectموضوع</label> <span id="subject-info"
+                    class="info"></span><br /> <input type="text"
+                    class="input-field" name="subject" id="subject" />
+            </div>
+            <div class="input-row">
+                <label>Messageپیام</label> <span id="userMessage-info"
+                    class="info"></span><br />
+                <textarea name="content" id="content"
+                    class="input-field" cols="60" rows="6"></textarea>
+            </div>
+            <div>
+                <input type="submit" name="send" class="btn-submit"
+                    value="Send" />
+                <div id="statusMessage"> 
+                        <?php
+                        if (! empty($message)) {
+                            ?>
+                            <p class='<?php echo $type; ?>Message'><?php echo $message; ?></p>
+                        <?php
+                        }
+                        ?>
+                    </div>
+            </div>
+        </form></center>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        function validateContactForm() {
+            var valid = true;
+            $(".info").html("");
+            $(".input-field").css('border', '#e0dfdf 1px solid');
+            varName = $("#Name").val();
+            var userName = $("#userName").val();
+           var city = $("#city").val();
+            var userEmail = $("#userEmail").val();
+            var subject = $("#subject").val();
+            var content = $("#content").val();
+            
+            if (userName == "") {
+                $("#userName-info").html("Required.");
+                $("#userName").css('border', '#e66262 1px solid');
+                valid = false;
+            }
+            if (userEmail == "") {
+                $("#userEmail-info").html("Required.");
+                $("#userEmail").css('border', '#e66262 1px solid');
+                valid = false;
+            }
+            if (!userEmail.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/))
+            {
+                $("#userEmail-info").html("Invalid Email Address.");
+                $("#userEmail").css('border', '#e66262 1px solid');
+                valid = false;
+            }
+            if (subject == "") {
+                $("#subject-info").html("Required.");
+                $("#subject").css('border', '#e66262 1px solid');
+                valid = false;
+            }
+            if (content == "") {
+                $("#userMessage-info").html("Required.");
+                $("#content").css('border', '#e66262 1px solid');
+                valid = false;
+            }
+            return valid;
+        }
+</script>
+  <tr>
+    <td><label>
+
+    </label>
+	</td>
+  </tr>
+
+ </table>
+ </form>
+</div>
+ <div align="center">
+          <center>
+        <dt><strong>Telephone:09224950365</strong> </dt>
+          </center>
+        </div>
+        <dd>
+          <p align="center">&nbsp;</dd>
+        <div align="center">
+          <center>
+        <dt><strong>FAX:09033451626</strong> </dt>
+          </center>
+        </div>
+        <dd>
+          <p align="center">&nbsp;</dd>
+        <div align="center">
+          <center>
+        <dt><strong>Postal address:تهران خیابان دماوند سه راه تهرانپارس خیابان دانشگاه سازمان آب  </strong> </dt>
+          </center>
+        </div>
+        <dd>
+          <p align="center"><!--webbot
+        bot="Substitution" s-variable="CompanyWebmaster" startspan -->[]<!--webbot
+        bot="Substitution" endspan i-CheckSum="277" --> </dd>
+        <div align="center">
+          <center>
+        <dt><font size="6"><a href="mailto:karafarinngo@gmail.com">KARAFARINNGO@GMAIL.COM </a></font></dt>
+          </center>
+        </div>
+      </dl>
+
+<p align="center">&nbsp;</p>
+</body>
+</html>
+
+
